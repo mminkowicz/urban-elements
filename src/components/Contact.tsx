@@ -79,7 +79,7 @@ export default function Contact() {
                 and surrounding neighborhoods.
               </p>
 
-              <div className="grid grid-cols-2 gap-y-4 gap-x-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
                 {areas.map((a) => (
                   <div key={a} className="flex items-center gap-2.5 text-xs uppercase tracking-[1.5px] font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />

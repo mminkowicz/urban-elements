@@ -67,7 +67,7 @@ export default function UrbanValues() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="flex flex-col"
             >
-              <span className="block font-serif text-[6rem] lg:text-[7rem] leading-none text-[#c5a059]/15 mb-6">
+              <span className="block font-serif text-[4.5rem] md:text-[6rem] lg:text-[7rem] leading-none text-[#c5a059]/15 mb-6">
                 {v.letter}
               </span>
               <h4 className="text-[13px] font-bold uppercase tracking-[1px] mb-4 leading-relaxed">

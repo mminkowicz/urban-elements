@@ -88,9 +88,9 @@ export default function Philosophy() {
                 className="w-full h-auto object-cover hover:scale-[1.03] transition-transform duration-[1.5s]"
               />
             </div>
-            <div className="absolute -bottom-5 left-6 bg-gold text-white px-7 py-5 rounded-xl shadow-xl z-10">
-              <p className="font-serif text-3xl font-bold leading-none">2021</p>
-              <p className="text-[10px] uppercase tracking-[2px] mt-1 opacity-90 font-semibold">
+            <div className="absolute -bottom-4 sm:-bottom-5 left-4 sm:left-6 bg-gold text-white px-5 py-4 sm:px-7 sm:py-5 rounded-xl shadow-xl z-10">
+              <p className="font-serif text-2xl sm:text-3xl font-bold leading-none">2021</p>
+              <p className="text-[9px] sm:text-[10px] uppercase tracking-[2px] mt-1 opacity-90 font-semibold">
                 Established In Atlanta
               </p>
             </div>

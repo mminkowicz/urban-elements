@@ -52,7 +52,7 @@ export default function Leadership() {
               beautiful spaces.
             </p>
 
-            <div className="flex gap-12 mt-10">
+            <div className="flex flex-wrap gap-8 sm:gap-12 mt-10">
               <div>
                 <p className="font-serif text-4xl font-bold leading-none mb-2">200+</p>
                 <p className="text-[11px] uppercase tracking-[2px] text-primary/45 font-semibold">Projects Completed</p>
