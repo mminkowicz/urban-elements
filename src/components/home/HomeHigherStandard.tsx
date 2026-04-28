@@ -34,7 +34,7 @@ export default function HomeHigherStandard() {
           <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-5">
             Why Urban Elements
           </span>
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             Landscaping That&apos;s Built to Last
           </h2>
           <p className="text-lg text-white/50 mb-8">

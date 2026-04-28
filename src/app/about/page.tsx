@@ -154,7 +154,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] mb-6"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6"
           >
             A Higher Standard in Landscape Design, Installation, and Maintenance
           </motion.h1>
@@ -178,7 +178,7 @@ export default function AboutPage() {
               <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
                 Our Story
               </span>
-              <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-8">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-8">
                 Founded on Principle
               </h2>
               <div className="space-y-5 text-base lg:text-[17px] leading-[1.9] text-primary/60">
@@ -226,7 +226,7 @@ export default function AboutPage() {
             <span className="block text-gold text-[11px] font-bold uppercase tracking-[3px] mb-5">
               Our Guiding Principles
             </span>
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
               The <span className="text-gold">U.R.B.A.N.</span> Standard
             </h2>
             <p className="text-[15px] leading-relaxed text-white/50 max-w-2xl mx-auto">
@@ -238,7 +238,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8">
             {urbanValues.map((v, i) => (
               <FadeIn key={v.letter} delay={i * 0.08}>
-                <span className="block font-serif text-[4.5rem] md:text-[6rem] lg:text-[7rem] leading-none text-gold/15 mb-6">
+                <span className="block font-serif text-5xl sm:text-6xl md:text-[4.5rem] leading-none text-gold/15 mb-6">
                   {v.letter}
                 </span>
                 <h4 className="text-[13px] font-bold uppercase tracking-[1px] mb-4 leading-relaxed">
@@ -260,7 +260,7 @@ export default function AboutPage() {
             <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
               Purpose
             </span>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-8">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-8">
               Our Mission
             </h2>
             <p className="text-base lg:text-[17px] leading-[1.9] text-primary/60">
@@ -309,7 +309,7 @@ export default function AboutPage() {
               <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
                 The Difference
               </span>
-              <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-6">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
                 What Sets Us Apart
               </h2>
               <p className="text-base leading-[1.9] text-primary/60 mb-10">
@@ -393,11 +393,11 @@ export default function AboutPage() {
             <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
               Where We Work
             </span>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
               Service Areas
             </h2>
           </FadeIn>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
             {serviceAreas.map((area, i) => (
               <FadeIn key={area} delay={i * 0.04}>
                 <div className="flex items-center gap-3 bg-white rounded-xl px-5 py-4 shadow-sm border border-primary/5">
@@ -419,7 +419,7 @@ export default function AboutPage() {
             <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
               Leadership
             </span>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
               Meet Oron, Owner &amp; Operator
             </h2>
           </FadeIn>
@@ -454,7 +454,7 @@ export default function AboutPage() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-primary/10">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-10 border-t border-primary/10">
                 {stats.map((s) => (
                   <div key={s.label} className="text-center">
                     <span className="block font-serif text-3xl lg:text-4xl font-bold text-accent">
@@ -523,7 +523,7 @@ export default function AboutPage() {
       <section className="py-24 lg:py-36 bg-accent text-white text-center">
         <div className="max-w-3xl mx-auto px-6 lg:px-16">
           <FadeIn>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-6">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
               Ready to Get Started?
             </h2>
             <p className="text-white/70 text-lg leading-relaxed mb-10">

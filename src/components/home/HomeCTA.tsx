@@ -17,7 +17,7 @@ export default function HomeCTA() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-8">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8">
             Ready to Improve Your Outdoor Space?
           </h2>
           <p className="text-base sm:text-lg leading-relaxed text-white/80 mb-12">

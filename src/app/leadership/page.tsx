@@ -33,7 +33,7 @@ export default function LeadershipPage() {
             <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
               Leadership
             </span>
-            <h1 className="font-serif text-4xl lg:text-5xl font-bold">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
               Meet Oron, Owner &amp; Operator
             </h1>
           </motion.div>
@@ -104,7 +104,7 @@ export default function LeadershipPage() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-primary/10">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-10 border-t border-primary/10">
                 {stats.map((s) => (
                   <div key={s.label} className="text-center">
                     <span className="block font-serif text-3xl lg:text-4xl font-bold text-accent">

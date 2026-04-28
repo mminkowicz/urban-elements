@@ -69,7 +69,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] mb-6"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6"
           >
             Let&apos;s Talk About Your Property
           </motion.h1>

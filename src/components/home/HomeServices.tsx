@@ -39,7 +39,7 @@ export default function HomeServices() {
           <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-5">
             Our Services
           </span>
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
             Professional Landscaping Solutions
           </h2>
           <p className="text-base leading-relaxed text-primary/55">

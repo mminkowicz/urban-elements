@@ -93,7 +93,7 @@ export default function ServiceAreaPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] mb-6"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6"
           >
             Areas We Serve
           </motion.h1>
@@ -129,7 +129,7 @@ export default function ServiceAreaPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-6">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
               Serving Your Neighborhood
             </h2>
             <p className="text-white/70 text-lg leading-relaxed mb-10">

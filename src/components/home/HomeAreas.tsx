@@ -31,7 +31,7 @@ export default function HomeAreas() {
           <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-5">
             Service Areas
           </span>
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
             Proudly Serving the Atlanta Area
           </h2>
         </motion.div>

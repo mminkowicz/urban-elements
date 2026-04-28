@@ -43,7 +43,7 @@ export default function HomeProcess() {
           <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-5">
             Our Process
           </span>
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
             How It Works
           </h2>
           <p className="text-base leading-relaxed text-primary/55">
@@ -59,9 +59,9 @@ export default function HomeProcess() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
-              className="relative bg-white rounded-2xl p-10 shadow-sm"
+              className="relative bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-sm"
             >
-              <span className="block font-serif text-6xl lg:text-7xl font-bold text-accent/15 mb-6 leading-none">
+              <span className="block font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-accent/15 mb-6 leading-none">
                 {s.num}
               </span>
               <h3 className="font-serif text-2xl font-bold mb-4">{s.title}</h3>
