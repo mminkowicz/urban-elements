@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 
 const propertyCare = [
@@ -47,31 +47,31 @@ function Dropdown({ label, items, open, onToggle, onClose }: {
   }, [open, onClose]);
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative h-full flex items-center">
       <button
         onClick={onToggle}
-        className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-[2px] text-primary hover:text-accent transition-colors bg-transparent border-none cursor-pointer"
+        className="flex items-center gap-1 text-[13px] font-semibold uppercase tracking-[1px] text-charcoal hover:text-forest transition-colors h-full"
       >
         {label}
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}>
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
+            exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 mt-4 bg-white rounded-xl shadow-xl border border-black/5 py-3 min-w-[240px] z-50"
+            className="absolute top-full left-0 mt-0 bg-white shadow-2xl border-t-2 border-forest py-2 min-w-[260px] z-50"
           >
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className="block px-5 py-2.5 text-[12px] font-medium text-primary/70 hover:text-accent hover:bg-accent/5 transition-colors"
+                className="block px-6 py-3 text-[13px] font-medium text-charcoal/80 hover:text-forest hover:bg-sand transition-colors"
               >
                 {item.label}
               </Link>
@@ -84,16 +84,16 @@ function Dropdown({ label, items, open, onToggle, onClose }: {
 }
 
 export default function Navigation() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
+  const { scrollY } = useScroll();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 40);
+  });
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -107,66 +107,90 @@ export default function Navigation() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed z-50 top-0 left-0 w-full flex items-center justify-between px-6 lg:px-12 py-4 bg-white border-b border-black/5 transition-all duration-300"
-      >
-        <Link href="/" className="font-serif text-lg font-black tracking-wider text-primary shrink-0">
-          URBAN <span className="italic font-normal text-accent">ELEMENTS</span>
-        </Link>
-
-        {/* Desktop */}
-        <div className="hidden xl:flex items-center gap-8">
-          <Link href="/" className="text-[11px] font-bold uppercase tracking-[2px] text-primary hover:text-accent transition-colors">Home</Link>
-          <Link href="/about" className="text-[11px] font-bold uppercase tracking-[2px] text-primary hover:text-accent transition-colors">About</Link>
-          <Dropdown label="Property Care" items={propertyCare} open={openDrop === "pc"} onToggle={() => setOpenDrop(openDrop === "pc" ? null : "pc")} onClose={() => setOpenDrop(null)} />
-          <Dropdown label="Landscape" items={landscape} open={openDrop === "ls"} onToggle={() => setOpenDrop(openDrop === "ls" ? null : "ls")} onClose={() => setOpenDrop(null)} />
-          <Dropdown label="Outdoor Living" items={outdoorLiving} open={openDrop === "ol"} onToggle={() => setOpenDrop(openDrop === "ol" ? null : "ol")} onClose={() => setOpenDrop(null)} />
-          <Link href="/contact" className="text-[11px] font-bold uppercase tracking-[2px] text-primary hover:text-accent transition-colors">Contact</Link>
-          <Link href="/contact" className="inline-block px-5 py-2 bg-accent text-white text-[11px] font-bold uppercase tracking-[2px] hover:bg-accent/85 transition-colors rounded">
-            Free Consultation
-          </Link>
+      {/* Top Bar (Like Infantry) */}
+      <div className="hidden md:flex bg-forest text-white text-[11px] font-medium tracking-[1px] uppercase py-2 px-6 lg:px-16 justify-between items-center z-50 relative">
+        <div className="flex items-center gap-6">
+          <span className="flex items-center gap-2">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Licensed & Insured
+          </span>
+          <span className="flex items-center gap-2">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Satisfaction Guaranteed
+          </span>
         </div>
+        <div className="flex items-center gap-6">
+          <a href="tel:4045550199" className="flex items-center gap-2 hover:text-gold transition-colors">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (404) 555-0199
+          </a>
+        </div>
+      </div>
 
-        {/* Hamburger */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="xl:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer relative z-[60]"
-          aria-label="Menu"
-        >
-          <span className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
-      </motion.nav>
+      {/* Main Nav */}
+      <header className={`fixed w-full z-40 transition-all duration-300 ${isScrolled ? "top-0 glass-nav py-2" : "top-0 md:top-[34px] bg-white py-4"}`}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-16 flex items-center justify-between">
+          
+          {/* Logo */}
+          <Link href="/" className="flex flex-col shrink-0">
+            <span className="font-serif text-2xl font-black tracking-wide text-forest leading-none">URBAN ELEMENTS</span>
+            <span className="text-[9px] uppercase tracking-[4px] text-gold font-bold mt-1">Atlanta</span>
+          </Link>
+
+          {/* Desktop Links */}
+          <div className="hidden xl:flex items-center gap-8 h-10">
+            <Link href="/" className="text-[13px] font-semibold uppercase tracking-[1px] text-charcoal hover:text-forest transition-colors">Home</Link>
+            <Link href="/about" className="text-[13px] font-semibold uppercase tracking-[1px] text-charcoal hover:text-forest transition-colors">About</Link>
+            <Dropdown label="Property Care" items={propertyCare} open={openDrop === "pc"} onToggle={() => setOpenDrop(openDrop === "pc" ? null : "pc")} onClose={() => setOpenDrop(null)} />
+            <Dropdown label="Landscape" items={landscape} open={openDrop === "ls"} onToggle={() => setOpenDrop(openDrop === "ls" ? null : "ls")} onClose={() => setOpenDrop(null)} />
+            <Dropdown label="Outdoor Living" items={outdoorLiving} open={openDrop === "ol"} onToggle={() => setOpenDrop(openDrop === "ol" ? null : "ol")} onClose={() => setOpenDrop(null)} />
+            <Link href="/contact" className="text-[13px] font-semibold uppercase tracking-[1px] text-charcoal hover:text-forest transition-colors">Contact</Link>
+          </div>
+
+          {/* CTA */}
+          <div className="hidden md:flex items-center">
+             <Link href="/contact" className="px-6 py-3 bg-forest text-white text-[12px] font-bold uppercase tracking-[1.5px] hover:bg-forest-light transition-colors rounded-sm">
+                Request Quote
+             </Link>
+          </div>
+
+          {/* Hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="xl:hidden flex flex-col gap-1.5 p-2"
+          >
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${mobileOpen ? "bg-forest rotate-45 translate-y-2" : "bg-charcoal"}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${mobileOpen ? "bg-forest opacity-0" : "bg-charcoal"}`} />
+            <span className={`block w-6 h-0.5 transition-all duration-300 ${mobileOpen ? "bg-forest -rotate-45 -translate-y-2" : "bg-charcoal"}`} />
+          </button>
+        </div>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-cream overflow-y-auto pt-24 pb-12 px-8"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-30 bg-white overflow-y-auto pt-28 pb-12 px-6"
           >
-            <div className="flex flex-col gap-4 max-w-md mx-auto">
-              <Link href="/" onClick={closeMobile} className="text-lg font-bold text-primary py-2">Home</Link>
-              <Link href="/about" onClick={closeMobile} className="text-lg font-bold text-primary py-2">About</Link>
+            <div className="flex flex-col gap-2 max-w-md mx-auto">
+              <Link href="/" onClick={closeMobile} className="text-lg font-serif font-bold text-forest py-3 border-b border-sand">Home</Link>
+              <Link href="/about" onClick={closeMobile} className="text-lg font-serif font-bold text-forest py-3 border-b border-sand">About</Link>
 
               {[
                 { label: "Property Care", key: "pc", items: propertyCare },
                 { label: "Landscape", key: "ls", items: landscape },
                 { label: "Outdoor Living", key: "ol", items: outdoorLiving },
               ].map((group) => (
-                <div key={group.key}>
+                <div key={group.key} className="border-b border-sand">
                   <button
                     onClick={() => setMobileExpanded(mobileExpanded === group.key ? null : group.key)}
-                    className="flex items-center justify-between w-full text-lg font-bold text-primary py-2 bg-transparent border-none cursor-pointer"
+                    className="flex items-center justify-between w-full text-lg font-serif font-bold text-forest py-3 bg-transparent border-none cursor-pointer"
                   >
                     {group.label}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform duration-200 ${mobileExpanded === group.key ? "rotate-180" : ""}`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform duration-200 ${mobileExpanded === group.key ? "rotate-180" : ""}`}>
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </button>
@@ -176,10 +200,10 @@ export default function Navigation() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden pl-4"
+                        className="overflow-hidden pl-4 pb-2"
                       >
                         {group.items.map((item) => (
-                          <Link key={item.href} href={item.href} onClick={closeMobile} className="block py-2 text-sm text-primary/60 hover:text-accent transition-colors">
+                          <Link key={item.href} href={item.href} onClick={closeMobile} className="block py-2.5 text-sm font-medium text-charcoal/70 hover:text-forest transition-colors">
                             {item.label}
                           </Link>
                         ))}
@@ -189,14 +213,14 @@ export default function Navigation() {
                 </div>
               ))}
 
-              <Link href="/contact" onClick={closeMobile} className="text-lg font-bold text-primary py-2">Contact Us</Link>
+              <Link href="/contact" onClick={closeMobile} className="text-lg font-serif font-bold text-forest py-3">Contact Us</Link>
 
               <Link
                 href="/contact"
                 onClick={closeMobile}
-                className="mt-4 w-full text-center py-4 bg-primary text-white text-sm font-bold uppercase tracking-[3px] rounded-sm"
+                className="mt-6 w-full text-center py-4 bg-forest text-white text-sm font-bold uppercase tracking-[2px] rounded-sm"
               >
-                Free Consultation
+                Request Quote
               </Link>
             </div>
           </motion.div>

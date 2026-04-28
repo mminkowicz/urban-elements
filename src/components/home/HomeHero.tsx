@@ -1,60 +1,64 @@
 "use client";
 
+import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-
-const locations = [
-  "Druid Hills", "Morningside", "Virginia Highlands", "Poncey-Highland",
-  "Brookhaven", "Tucker", "Chamblee", "Avondale Estates", "Decatur",
-];
-const marqueeItems = [...locations, ...locations, ...locations, ...locations];
 
 export default function HomeHero() {
   return (
-    <section className="bg-[#111413] text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 pt-36 pb-20 lg:pt-48 lg:pb-28">
+    <section className="relative w-full h-[90vh] min-h-[600px] flex items-center overflow-hidden">
+      {/* High-end background image */}
+      <Image
+        src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"
+        alt="Luxury landscaping by Urban Elements Atlanta"
+        fill
+        priority
+        className="object-cover"
+      />
+      
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/60" />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-20">
         <div className="max-w-3xl">
-          <p className="text-[#3d7a4f] text-[11px] font-bold uppercase tracking-[4px] mb-5">
-            Urban Elements Atlanta
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6 text-shadow-sm">
+              Top-Rated Landscaping <br/><span className="text-gold">Atlanta, GA</span>
+            </h1>
+          </motion.div>
 
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-[2.75rem] font-bold leading-[1.25] mb-6">
-            Professional Landscaping for Atlanta Homeowners
-          </h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-white/90 text-base md:text-lg leading-relaxed mb-10 max-w-2xl text-shadow-sm"
+          >
+            Urban Elements Atlanta provides premium landscape maintenance, design, and installation services for homeowners who value professionalism, reliability, and long-term quality.
+          </motion.p>
 
-          <p className="text-white/55 text-[15px] leading-[1.8] mb-4 max-w-xl">
-            Thoughtful design, reliable maintenance, and clean installations — delivered with care, consistency, and attention to detail.
-          </p>
-
-          <p className="text-white/30 text-[10px] uppercase tracking-[2.5px] mb-10">
-            Licensed &amp; Insured &bull; Owner-Operated &bull; Serving Atlanta &amp; Surrounding Areas
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
             <Link
               href="/contact"
-              className="inline-block text-center px-7 py-3.5 bg-[#3d7a4f] text-white text-[11px] font-bold uppercase tracking-[2px] rounded hover:bg-[#356e45] transition-colors"
+              className="inline-flex justify-center items-center px-8 py-4 bg-forest hover:bg-forest-light text-white text-[13px] font-bold uppercase tracking-[2px] transition-colors rounded-sm"
             >
-              Schedule a Free Consultation
+              Request a Quote
             </Link>
             <Link
               href="#services"
-              className="inline-block text-center px-7 py-3.5 text-white/50 text-[11px] font-bold uppercase tracking-[2px] border border-white/15 rounded hover:text-white hover:border-white/30 transition-colors"
+              className="inline-flex justify-center items-center px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-[13px] font-bold uppercase tracking-[2px] hover:bg-white hover:text-forest transition-colors rounded-sm"
             >
-              View Our Services
+              Explore Services
             </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Marquee */}
-      <div className="border-t border-white/8 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap py-3.5">
-          {marqueeItems.map((loc, i) => (
-            <span key={i} className="inline-flex items-center gap-2 mx-5 text-[10px] font-medium uppercase tracking-[2px] text-white/30">
-              <span className="w-1 h-1 rounded-full bg-[#3d7a4f] shrink-0" />
-              {loc}
-            </span>
-          ))}
+          </motion.div>
         </div>
       </div>
     </section>
