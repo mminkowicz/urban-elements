@@ -129,7 +129,7 @@ export default function Navigation() {
 
       {/* Main Nav */}
       <header className={`fixed w-full z-40 transition-all duration-300 ${isScrolled ? "top-0 glass-nav py-2" : "top-0 md:top-[34px] bg-white py-4"}`}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-16 flex items-center justify-between">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 flex items-center justify-between">
           
           {/* Logo */}
           <Link href="/" className="flex flex-col shrink-0">
