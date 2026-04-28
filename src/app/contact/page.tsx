@@ -7,11 +7,35 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 const services = [
-  "Landscape Maintenance",
+  "Recurring Maintenance",
+  "Fertilizer & Weed Control",
+  "Seasonal Cleanups",
+  "Aeration & Overseeding",
   "Landscape Design",
   "Landscape Installation",
+  "Complete Transformations",
+  "Sod & Grading",
+  "Drainage Solutions",
+  "Planting Trees & Shrubs",
+  "Artificial Turf",
+  "Pavers, Concrete & Gravel",
+  "Concrete Services",
+  "Fire Pit Installation",
+  "Water Features",
   "Outdoor Living",
   "Other",
+];
+
+const serviceAreas = [
+  "Druid Hills",
+  "Morningside",
+  "Virginia Highlands",
+  "Poncey-Highland",
+  "Brookhaven",
+  "Tucker",
+  "Chamblee",
+  "Avondale Estates",
+  "Decatur",
 ];
 
 export default function ContactPage() {
@@ -29,36 +53,50 @@ export default function ContactPage() {
     <>
       <Navigation />
 
-      <main className="pt-32 pb-28 lg:pt-40 lg:pb-40 bg-cream">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+      {/* A) Hero Banner */}
+      <section className="relative bg-primary text-white pt-40 pb-24 lg:pt-48 lg:pb-36">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-15" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-16 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16 lg:mb-20"
+            className="inline-block text-gold text-xs font-bold uppercase tracking-[4px] mb-6 border border-gold/30 px-4 py-1.5 rounded-full"
           >
-            <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-4">
-              Get in Touch
-            </span>
-            <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4">
-              Contact Us
-            </h1>
-            <p className="text-lg text-primary/55 max-w-2xl mx-auto leading-relaxed">
-              Ready to improve your outdoor space? Schedule a free consultation.
-            </p>
-          </motion.div>
+            Contact Us
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] mb-6"
+          >
+            Let&apos;s Talk About Your Property
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-lg lg:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed"
+          >
+            Schedule a free consultation and discover how we can transform your
+            outdoor space.
+          </motion.p>
+        </div>
+      </section>
 
-          {/* Card */}
+      {/* B) Form + Sidebar */}
+      <section className="py-24 lg:py-36 bg-cream">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="bg-white rounded-3xl overflow-hidden shadow-xl"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-5">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr]">
               {/* Form */}
-              <div className="lg:col-span-3 p-10 md:p-16 lg:p-20">
+              <div className="p-10 md:p-16 lg:p-20">
                 <h2 className="font-serif text-2xl lg:text-3xl font-bold mb-2">
                   Request a Consultation
                 </h2>
@@ -76,17 +114,25 @@ export default function ContactPage() {
                       Thank You!
                     </h3>
                     <p className="text-primary/55">
-                      We&apos;ll be in touch shortly.
+                      We&apos;ll be in touch shortly to discuss your project.
                     </p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <input
-                      type="text"
-                      placeholder="Full Name*"
-                      required
-                      className={inputClass}
-                    />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <input
+                        type="text"
+                        placeholder="First Name*"
+                        required
+                        className={inputClass}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Last Name*"
+                        required
+                        className={inputClass}
+                      />
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <input
                         type="email"
@@ -134,17 +180,16 @@ export default function ContactPage() {
               </div>
 
               {/* Sidebar */}
-              <div className="lg:col-span-2 bg-accent text-white p-10 md:p-16 lg:p-16 flex flex-col justify-center">
+              <div className="bg-accent text-white p-10 md:p-16 lg:p-16 flex flex-col justify-center">
                 <h3 className="font-serif text-2xl font-bold mb-3">
                   Get in Touch
                 </h3>
                 <p className="text-white/65 text-sm leading-relaxed mb-10">
-                  We proudly serve the greater Atlanta area including Druid
-                  Hills, Morningside, Virginia Highlands, Brookhaven, Decatur,
-                  and surrounding neighborhoods.
+                  We proudly serve the greater Atlanta area. Reach out and
+                  let&apos;s discuss how we can help with your property.
                 </p>
 
-                <div className="space-y-6 mb-12">
+                <div className="space-y-6 mb-10">
                   <div>
                     <p className="text-[10px] uppercase tracking-[3px] font-bold mb-2 text-white/70">
                       Phone
@@ -158,19 +203,27 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-[3px] font-bold mb-2 text-white/70">
-                      Service Area
-                    </p>
-                    <p className="text-sm text-white/65">
-                      Atlanta, Georgia &amp; Surrounding Communities
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[3px] font-bold mb-2 text-white/70">
                       Hours
                     </p>
                     <p className="text-sm text-white/65">
                       Monday – Friday: 7:00 AM – 6:00 PM
                     </p>
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t border-white/20 mb-10">
+                  <p className="text-[10px] uppercase tracking-[3px] font-bold mb-4 text-white/70">
+                    Service Areas
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {serviceAreas.map((area) => (
+                      <span
+                        key={area}
+                        className="text-xs bg-white/10 text-white/80 px-3 py-1.5 rounded-full"
+                      >
+                        {area}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
@@ -202,7 +255,7 @@ export default function ContactPage() {
             </p>
           </motion.div>
         </div>
-      </main>
+      </section>
 
       <Footer />
     </>

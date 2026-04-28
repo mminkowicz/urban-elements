@@ -1,39 +1,36 @@
 import { MetadataRoute } from "next";
 
-const base = "https://urbanelementsatlanta.com";
+const services = [
+  "recurring-maintenance",
+  "fertilizer-weed-control",
+  "seasonal-cleanups",
+  "aeration-overseeding",
+  "landscape-design",
+  "landscape-installation",
+  "complete-transformations",
+  "sod-grading",
+  "drainage-solutions",
+  "planting-trees-shrubs",
+  "artificial-turf",
+  "outdoor-living",
+  "pavers-concrete-gravel",
+  "concrete",
+  "fire-pits",
+  "water-features",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = [
-    "",
-    "/about",
-    "/leadership",
-    "/service-area",
-    "/contact",
-    "/property-care/maintenance",
-    "/property-care/fertilizer-weed-control",
-    "/property-care/mulch-pine-straw",
-    "/property-care/cleanups",
-    "/property-care/aeration-overseeding",
-    "/landscape/design",
-    "/landscape/installation",
-    "/landscape/transformations",
-    "/landscape/sod-grading",
-    "/landscape/drainage",
-    "/landscape/planting",
-    "/landscape/artificial-turf",
-    "/outdoor-living",
-    "/outdoor-living/pavers-concrete-gravel",
-    "/outdoor-living/concrete",
-    "/outdoor-living/fire-pits",
-    "/outdoor-living/water-features",
-    "/outdoor-living/artificial-turf",
-    "/outdoor-living/irrigation",
-  ];
+  const base = "https://urbanelementsatlanta.com";
 
-  return pages.map((path) => ({
-    url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : path.split("/").length <= 2 ? 0.8 : 0.6,
-  }));
+  return [
+    { url: base, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
+    { url: `${base}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    ...services.map((slug) => ({
+      url: `${base}/services/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  ];
 }
