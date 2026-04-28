@@ -1,61 +1,147 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+const locations = [
+  "Druid Hills",
+  "Morningside",
+  "Virginia Highlands",
+  "Poncey-Highland",
+  "Brookhaven",
+  "Tucker",
+  "Chamblee",
+  "Avondale Estates",
+  "Decatur",
+];
+const marqueeItems = [...locations, ...locations, ...locations, ...locations];
 
 export default function HomeHero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const labelRef = useRef<HTMLParagraphElement>(null);
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const badgeRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.fromTo(
+        labelRef.current,
+        { autoAlpha: 0, x: -40 },
+        { autoAlpha: 1, x: 0, duration: 0.6 }
+      )
+        .fromTo(
+          h1Ref.current,
+          { autoAlpha: 0, x: -50 },
+          { autoAlpha: 1, x: 0, duration: 0.7 },
+          "-=0.35"
+        )
+        .fromTo(
+          subtitleRef.current,
+          { autoAlpha: 0, x: -30 },
+          { autoAlpha: 1, x: 0, duration: 0.6 },
+          "-=0.35"
+        )
+        .fromTo(
+          badgeRef.current,
+          { autoAlpha: 0, x: -20 },
+          { autoAlpha: 1, x: 0, duration: 0.5 },
+          "-=0.3"
+        )
+        .fromTo(
+          ctaRef.current,
+          { autoAlpha: 0, x: -30 },
+          { autoAlpha: 1, x: 0, duration: 0.6 },
+          "-=0.25"
+        );
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section className="bg-dark text-white pt-32 pb-20 lg:pt-44 lg:pb-28">
-      <div className="max-w-4xl mx-auto px-6 lg:px-16 text-center">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-accent text-[11px] font-bold uppercase tracking-[3px] mb-6"
-        >
-          Urban Elements Atlanta
-        </motion.p>
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col">
+      <Image
+        src="/images/hero.jpg"
+        alt="Atlanta landscape"
+        fill
+        priority
+        className="object-cover"
+        sizes="100vw"
+      />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.2] mb-6"
-        >
-          Professional Landscaping for Atlanta Homeowners
-        </motion.h1>
+      <div className="absolute inset-0 bg-gradient-to-r from-green-dark/95 via-green-dark/80 to-green-dark/40" />
 
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="text-white/60 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto mb-4"
-        >
-          Thoughtful design, reliable maintenance, and clean installations — delivered with care, consistency, and attention to detail.
-        </motion.p>
+      <div className="relative z-10 flex-1 flex items-center">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16 w-full py-32 lg:py-44">
+          <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+            <p
+              ref={labelRef}
+              className="invisible text-gold text-[11px] font-bold uppercase tracking-[3px] mb-6"
+            >
+              Urban Elements Atlanta
+            </p>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.45 }}
-          className="text-white/35 text-[11px] uppercase tracking-[2px] mb-10"
-        >
-          Licensed &amp; Insured &bull; Owner-Operated &bull; Serving Atlanta &amp; Surrounding Areas
-        </motion.p>
+            <h1
+              ref={h1Ref}
+              className="invisible font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-[1.2] mb-6"
+            >
+              Professional Landscaping for Atlanta Homeowners
+            </h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.55 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3"
-        >
-          <Link href="/contact" className="px-7 py-3 bg-accent text-white text-[11px] font-bold uppercase tracking-[2px] rounded hover:bg-accent/85 transition-colors">
-            Schedule a Free Consultation
-          </Link>
-          <Link href="#services" className="px-7 py-3 text-white/60 text-[11px] font-bold uppercase tracking-[2px] border border-white/15 rounded hover:text-white hover:border-white/30 transition-colors">
-            View Our Services
-          </Link>
-        </motion.div>
+            <p
+              ref={subtitleRef}
+              className="invisible text-white/60 text-sm sm:text-base leading-relaxed mb-4"
+            >
+              Thoughtful design, reliable maintenance, and clean installations
+              — delivered with care, consistency, and attention to detail.
+            </p>
+
+            <p
+              ref={badgeRef}
+              className="invisible text-white/35 text-[11px] uppercase tracking-[2px] mb-10"
+            >
+              Licensed &amp; Insured &bull; Owner-Operated &bull; Serving
+              Atlanta &amp; Surrounding Areas
+            </p>
+
+            <div
+              ref={ctaRef}
+              className="invisible flex flex-col sm:flex-row items-center lg:items-start gap-3"
+            >
+              <Link
+                href="/contact"
+                className="px-7 py-3.5 bg-accent text-white text-[11px] font-bold uppercase tracking-[2px] rounded hover:bg-accent/85 transition-colors"
+              >
+                Schedule a Free Consultation
+              </Link>
+              <Link
+                href="#services"
+                className="px-7 py-3.5 text-white/60 text-[11px] font-bold uppercase tracking-[2px] border border-white/15 rounded hover:text-white hover:border-white/30 transition-colors"
+              >
+                View Our Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 border-t border-white/10 bg-dark/60 backdrop-blur-sm overflow-hidden">
+        <div className="flex animate-marquee whitespace-nowrap py-4">
+          {marqueeItems.map((loc, i) => (
+            <span
+              key={`${loc}-${i}`}
+              className="mx-6 text-[11px] text-white/40 uppercase tracking-[2px] shrink-0"
+            >
+              {loc}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -2,12 +2,14 @@
 
 @theme inline {
   --color-primary: #1b1f1c;
-  --color-accent: #2d6a3f;
+  --color-accent: #3d7a4f;
   --color-accent-light: #eaf2ec;
   --color-gold: #b8963e;
+  --color-copper: #c17f59;
   --color-cream: #fafaf8;
   --color-dark: #111413;
   --color-muted: #f3f3f0;
+  --color-green-dark: #1e3a2a;
   --font-sans: var(--font-montserrat);
   --font-serif: var(--font-playfair);
 }
