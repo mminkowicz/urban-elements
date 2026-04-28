@@ -111,12 +111,7 @@ export default function Navigation() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-        className={[
-          "fixed z-50 flex items-center justify-between backdrop-blur-xl transition-all duration-500",
-          scrolled
-            ? "top-0 left-0 w-full rounded-none px-6 lg:px-12 py-3 bg-white/95 shadow-sm border-b border-black/5"
-            : "top-4 left-[2%] w-[96%] rounded-full px-6 lg:px-10 py-3 bg-white/85 shadow-lg border border-white/40",
-        ].join(" ")}
+        className="fixed z-50 top-0 left-0 w-full flex items-center justify-between px-6 lg:px-12 py-4 bg-white border-b border-black/5 transition-all duration-300"
       >
         <Link href="/" className="font-serif text-lg font-black tracking-wider text-primary shrink-0">
           URBAN <span className="italic font-normal text-accent">ELEMENTS</span>
@@ -130,7 +125,7 @@ export default function Navigation() {
           <Dropdown label="Landscape" items={landscape} open={openDrop === "ls"} onToggle={() => setOpenDrop(openDrop === "ls" ? null : "ls")} onClose={() => setOpenDrop(null)} />
           <Dropdown label="Outdoor Living" items={outdoorLiving} open={openDrop === "ol"} onToggle={() => setOpenDrop(openDrop === "ol" ? null : "ol")} onClose={() => setOpenDrop(null)} />
           <Link href="/contact" className="text-[11px] font-bold uppercase tracking-[2px] text-primary hover:text-accent transition-colors">Contact</Link>
-          <Link href="/contact" className="inline-block px-5 py-2 bg-accent text-white text-[11px] font-bold uppercase tracking-[2px] hover:bg-accent/85 transition-colors rounded-lg shadow-sm shadow-accent/20">
+          <Link href="/contact" className="inline-block px-5 py-2 bg-accent text-white text-[11px] font-bold uppercase tracking-[2px] hover:bg-accent/85 transition-colors rounded">
             Free Consultation
           </Link>
         </div>
