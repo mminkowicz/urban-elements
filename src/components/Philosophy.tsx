@@ -2,37 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
-
-const badges = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-    title: "Licensed & Insured",
-    text: "Fully licensed and insured — peace of mind for every property.",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2a10 10 0 1 0 10 10" /><path d="M12 12l7-7" /><path d="M12 12V2" />
-      </svg>
-    ),
-    title: "Owner-Operated",
-    text: "Work directly with a professional personally invested in the outcome.",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-    title: "Environmental Care",
-    text: "Responsible practices that promote long-term plant health and sustainability.",
-  },
-];
+import Link from "next/link";
 
 export default function Philosophy() {
   const ref = useRef(null);
@@ -41,81 +11,58 @@ export default function Philosophy() {
   return (
     <section id="about" ref={ref} className="py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
-        {/* Two-column intro */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24 lg:mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="order-2 lg:order-1"
           >
             <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-5">
-              About Urban Elements
+              About Us
             </span>
             <h2 className="font-serif text-4xl lg:text-5xl font-bold leading-[1.15] mb-8">
-              A higher standard in landscape design, installation, and maintenance.
+              Landscaping That&apos;s Built to Last
             </h2>
-            <p className="text-lg font-light leading-relaxed text-primary/65 mb-6">
-              Urban Elements Atlanta was founded on a simple principle: do
-              exceptional work, operate with integrity, and build lasting
-              relationships through consistency and trust.
+            <p className="text-base leading-relaxed text-primary/65 mb-5">
+              Urban Elements Atlanta provides premium landscape maintenance, design,
+              and installation services for homeowners who value professionalism,
+              reliability, and long-term quality.
             </p>
-            <p className="text-base leading-relaxed text-primary/55 mb-6">
-              As a small, owner-operated company, we focus on doing fewer
-              jobs — but doing them exceptionally well. We grow primarily through
-              referrals and long-term customer relationships, dedicating more
-              time, attention, and care to each property.
+            <p className="text-base leading-relaxed text-primary/55 mb-5">
+              We help clients improve and maintain their outdoor spaces with a
+              thoughtful approach that balances design, function, and long-term care.
+              As a licensed and insured, owner-operated company, we provide clear
+              communication, consistent service, and full accountability from start
+              to finish.
             </p>
-            <p className="text-base leading-relaxed text-primary/55">
-              Our mission is to provide exceptional landscaping services rooted
-              in accountability, integrity, and clear communication. We take full
-              ownership of our work and stand behind everything we do.
+            <p className="text-base leading-relaxed text-primary/55 mb-8">
+              Our business is built primarily through referrals and long-term clients,
+              allowing us to focus on quality rather than volume.
             </p>
+            <Link href="/about" className="inline-flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-[2px] hover:gap-3 transition-all duration-300">
+              Learn More About Us <span className="text-lg">→</span>
+            </Link>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative order-1 lg:order-2"
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           >
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=1200"
-                alt="Beautifully landscaped garden path by Urban Elements Atlanta"
-                width={1200}
-                height={800}
-                className="w-full h-auto object-cover hover:scale-[1.03] transition-transform duration-[1.5s]"
-              />
-            </div>
-            <div className="absolute -bottom-4 sm:-bottom-5 left-4 sm:left-6 bg-gold text-white px-5 py-4 sm:px-7 sm:py-5 rounded-xl shadow-xl z-10">
-              <p className="font-serif text-2xl sm:text-3xl font-bold leading-none">2021</p>
-              <p className="text-[9px] sm:text-[10px] uppercase tracking-[2px] mt-1 opacity-90 font-semibold">
-                Established In Atlanta
-              </p>
-            </div>
+            {[
+              { title: "Owner-Operated", desc: "Every property receives personal attention and consistent oversight from the owner." },
+              { title: "Licensed & Insured", desc: "Full protection and peace of mind for every property we service." },
+              { title: "Referral-Driven", desc: "We grow through trust — most of our work comes from client referrals." },
+              { title: "Long-Term Focus", desc: "We build lasting relationships, not just complete one-time projects." },
+            ].map((item, i) => (
+              <div key={item.title} className="bg-white rounded-xl p-7 shadow-sm">
+                <div className="w-8 h-1 bg-accent rounded-full mb-5" />
+                <h3 className="text-sm font-bold mb-2">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-primary/50">{item.desc}</p>
+              </div>
+            ))}
           </motion.div>
-        </div>
-
-        {/* Three badge row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {badges.map((b, i) => (
-            <motion.div
-              key={b.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-              className="flex gap-5"
-            >
-              <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent shrink-0 mt-1">
-                {b.icon}
-              </div>
-              <div>
-                <h4 className="text-sm font-bold mb-1">{b.title}</h4>
-                <p className="text-sm leading-relaxed text-primary/50">{b.text}</p>
-              </div>
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>

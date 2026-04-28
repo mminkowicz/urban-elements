@@ -4,7 +4,6 @@ import Services from "@/components/Services";
 import Philosophy from "@/components/Philosophy";
 import UrbanValues from "@/components/UrbanValues";
 import HowItWorks from "@/components/HowItWorks";
-import Leadership from "@/components/Leadership";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -18,7 +17,6 @@ export default function Home() {
       <Philosophy />
       <UrbanValues />
       <HowItWorks />
-      <Leadership />
       <Testimonials />
       <Contact />
       <Footer />
