@@ -130,7 +130,7 @@ export default function Navigation() {
           <Dropdown label="Landscape" items={landscape} open={openDrop === "ls"} onToggle={() => setOpenDrop(openDrop === "ls" ? null : "ls")} onClose={() => setOpenDrop(null)} />
           <Dropdown label="Outdoor Living" items={outdoorLiving} open={openDrop === "ol"} onToggle={() => setOpenDrop(openDrop === "ol" ? null : "ol")} onClose={() => setOpenDrop(null)} />
           <Link href="/contact" className="text-[11px] font-bold uppercase tracking-[2px] text-primary hover:text-accent transition-colors">Contact</Link>
-          <Link href="/contact" className="inline-block px-5 py-2 bg-primary text-white text-[11px] font-bold uppercase tracking-[2px] hover:bg-accent transition-colors rounded-sm">
+          <Link href="/contact" className="inline-block px-5 py-2 bg-accent text-white text-[11px] font-bold uppercase tracking-[2px] hover:bg-accent/85 transition-colors rounded-lg shadow-sm shadow-accent/20">
             Free Consultation
           </Link>
         </div>

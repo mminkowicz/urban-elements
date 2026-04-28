@@ -1,90 +1,76 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import { useRef } from "react";
+import Link from "next/link";
 
 const steps = [
-  {
-    num: "01",
-    title: "Consultation",
-    desc: "We begin with a consultation to understand your property, goals, and priorities.",
-  },
-  {
-    num: "02",
-    title: "Clear Plan",
-    desc: "You receive a clear plan and straightforward pricing with full transparency.",
-  },
-  {
-    num: "03",
-    title: "Professional Execution",
-    desc: "Work is completed professionally, efficiently, and with careful attention to detail.",
-  },
-  {
-    num: "04",
-    title: "Ongoing Care",
-    desc: "We remain available for ongoing maintenance, improvements, and long-term care.",
-  },
+  { num: "01", title: "Consultation", desc: "We begin with a consultation to understand your property, goals, and priorities." },
+  { num: "02", title: "Clear Plan", desc: "You receive a clear plan and straightforward pricing with full transparency." },
+  { num: "03", title: "Professional Execution", desc: "Work is completed professionally, efficiently, and with careful attention to detail." },
+  { num: "04", title: "Ongoing Care", desc: "We remain available for ongoing maintenance, improvements, and long-term care." },
 ];
 
 export default function HomeProcess() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="py-24 lg:py-36 bg-muted">
+    <section ref={ref} className="py-24 lg:py-36 bg-accent-light">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center max-w-3xl mx-auto mb-16 lg:mb-24"
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <span className="block text-accent text-xs font-bold uppercase tracking-[4px] mb-5">
+          <span className="inline-block bg-accent/10 text-accent text-[11px] font-bold uppercase tracking-[3px] px-4 py-1.5 rounded-full mb-5">
             Our Process
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
             How It Works
           </h2>
-          <p className="text-base leading-relaxed text-primary/55">
-            From the first conversation to ongoing care, we make the process
-            easy and transparent every step of the way.
+          <p className="text-sm leading-relaxed text-primary/50">
+            From the first conversation to ongoing care, we make the process easy and transparent every step of the way.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 mb-16">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.num}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
-              className="relative bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-sm"
-            >
-              <span className="block font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-accent/15 mb-6 leading-none">
-                {s.num}
-              </span>
-              <h3 className="font-serif text-2xl font-bold mb-4">{s.title}</h3>
-              <p className="text-sm leading-[1.8] text-primary/55">{s.desc}</p>
+        {/* Timeline */}
+        <div className="relative">
+          {/* Connecting line — desktop only */}
+          <div className="hidden lg:block absolute top-[52px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-[2px] bg-accent/20" />
 
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 text-accent/30 text-2xl">
-                  →
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                className="relative text-center"
+              >
+                {/* Number circle */}
+                <div className="w-[44px] h-[44px] rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg shadow-accent/20">
+                  {s.num}
                 </div>
-              )}
-            </motion.div>
-          ))}
+                <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
+                  <h3 className="font-serif text-lg font-bold mb-3">{s.title}</h3>
+                  <p className="text-sm leading-relaxed text-primary/50">{s.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center"
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="text-center mt-12"
         >
           <Link
             href="/contact"
-            className="inline-block px-10 py-5 bg-accent text-white text-xs font-bold uppercase tracking-[3px] hover:bg-primary transition-colors duration-300"
+            className="inline-block px-8 py-4 bg-accent text-white text-[11px] font-bold uppercase tracking-[2.5px] rounded-lg hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20"
           >
             Get Started Today
           </Link>
