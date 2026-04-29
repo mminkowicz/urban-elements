@@ -12,7 +12,7 @@ export default function HomeAreas() {
   return (
     <section className="py-24 lg:py-32 bg-stone">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
-        <div className="bg-forest rounded-3xl p-12 md:p-20 text-white text-center shadow-xl">
+        <div className="bg-forest p-8 text-white shadow-xl md:p-16 lg:p-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export default function HomeAreas() {
               Service Areas
             </span>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold">
-              Proudly Serving the Atlanta Area
+              Focused on Atlanta neighborhoods and nearby suburbs
             </h2>
           </motion.div>
 

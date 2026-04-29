@@ -1,37 +1,73 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function HomeCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      gsap.from(".cta-content > *", {
+        autoAlpha: 0,
+        y: reduceMotion ? 0 : 28,
+        duration: reduceMotion ? 0.01 : 0.75,
+        ease: "power3.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: ".cta-content",
+          start: "top 78%",
+        },
+      });
+
+      if (!reduceMotion) {
+        gsap.to(".cta-image", {
+          scale: 1.08,
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section className="relative py-32 lg:py-48 overflow-hidden">
+    <section ref={sectionRef} className="relative py-32 lg:py-48 overflow-hidden">
       <Image
-        src="https://images.unsplash.com/photo-1592424001807-6f81153bc073?q=80&w=2000&auto=format&fit=crop"
-        alt="Beautiful Atlanta landscape"
+        src="/images/service-maintenance.jpg"
+        alt="Residential Atlanta lawn and maintained planting beds"
         fill
-        className="object-cover"
+        sizes="100vw"
+        className="cta-image object-cover"
       />
       <div className="absolute inset-0 bg-forest/85" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-16 text-center text-white">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.7 }}
-        >
+        <div className="cta-content">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-shadow-sm">
-            Ready to Improve Your Outdoor Space?
+            Want the yard to feel handled?
           </h2>
           <p className="text-base sm:text-lg leading-relaxed text-white/80 mb-10 max-w-2xl mx-auto text-shadow-sm">
-            If you&apos;re looking for a professional landscaping company that values quality, reliability, and clear communication, we would be glad to learn more about your property and goals.
+            Tell us what is bothering you about the property: overgrown beds, tired turf, weak curb appeal, drainage trouble, or a project that needs a clean finish.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="px-8 py-4 bg-gold hover:bg-gold-light text-forest text-[12px] font-bold uppercase tracking-[2px] rounded-sm transition-colors shadow-lg"
+              className="px-8 py-4 bg-gold hover:bg-white text-forest text-[12px] font-bold uppercase tracking-[2px] rounded-sm transition-colors shadow-lg"
             >
               Free Consultation
             </Link>
@@ -42,7 +78,7 @@ export default function HomeCTA() {
               Contact Us
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

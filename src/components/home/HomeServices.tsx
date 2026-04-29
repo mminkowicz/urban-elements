@@ -1,67 +1,136 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { MouseEvent, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   { 
     title: "Landscape Maintenance", 
-    desc: "Consistent, detail-focused maintenance that keeps your property clean, healthy, and looking its best year-round.", 
+    desc: "Mowing, edging, pruning, bed care, and cleanup work that keeps the property looking cared for between seasons.", 
     href: "/services/recurring-maintenance",
-    img: "https://images.unsplash.com/photo-1592424001807-6f81153bc073?q=80&w=800&auto=format&fit=crop"
+    img: "/images/service-maintenance.jpg"
   },
   { 
     title: "Landscape Design", 
-    desc: "Thoughtful designs tailored to your property, goals, and long-term vision.", 
+    desc: "Practical planting and layout recommendations that fit the home, the light, and the way the yard is actually used.", 
     href: "/services/landscape-design",
-    img: "https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=800&auto=format&fit=crop"
+    img: "https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=900&auto=format&fit=crop"
   },
   { 
     title: "Landscape Installation", 
-    desc: "Professional installation of plants, sod, mulch, and landscape improvements using proper techniques and quality materials.", 
+    desc: "Planting, sod, mulch, pine straw, grading, and hardscape details installed with clean lines and sound prep work.", 
     href: "/services/landscape-installation",
-    img: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?q=80&w=800&auto=format&fit=crop"
+    img: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?q=80&w=900&auto=format&fit=crop"
   },
   { 
     title: "Seasonal Enhancements", 
-    desc: "Seasonal cleanups, mulch and pine straw installation, and landscape enhancements to keep your property looking its best.", 
+    desc: "Fresh mulch, pine straw, leaf cleanup, pruning, and small improvements timed around the Atlanta growing season.", 
     href: "/services/seasonal-cleanups",
-    img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=800&auto=format&fit=crop"
+    img: "/images/service-seasonal.jpg"
   },
 ];
 
 export default function HomeServices() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      gsap.from(".services-heading > *", {
+        autoAlpha: 0,
+        y: reduceMotion ? 0 : 24,
+        duration: reduceMotion ? 0.01 : 0.75,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".services-heading",
+          start: "top 78%",
+        },
+      });
+
+      gsap.from(".service-card", {
+        autoAlpha: 0,
+        y: reduceMotion ? 0 : 42,
+        clipPath: reduceMotion ? "inset(0% 0% 0% 0%)" : "inset(12% 0% 0% 0%)",
+        duration: reduceMotion ? 0.01 : 0.85,
+        ease: "power3.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: ".services-grid",
+          start: "top 78%",
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
+
+  const handleCardMove = (event: MouseEvent<HTMLAnchorElement>) => {
+    const card = event.currentTarget;
+    const bounds = card.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const rotateY = ((x / bounds.width) - 0.5) * 7;
+    const rotateX = -((y / bounds.height) - 0.5) * 7;
+
+    gsap.to(card, {
+      rotateX,
+      rotateY,
+      y: -8,
+      transformPerspective: 900,
+      transformOrigin: "center",
+      duration: 0.35,
+      ease: "power2.out",
+    });
+  };
+
+  const handleCardLeave = (event: MouseEvent<HTMLAnchorElement>) => {
+    gsap.to(event.currentTarget, {
+      rotateX: 0,
+      rotateY: 0,
+      y: 0,
+      duration: 0.55,
+      ease: "elastic.out(1, 0.55)",
+    });
+  };
+
   return (
-    <section id="services" className="py-24 lg:py-32 bg-stone">
+    <section ref={sectionRef} id="services" className="py-24 lg:py-32 bg-stone">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="services-heading max-w-3xl mb-16">
+          <span className="block text-gold text-[11px] font-bold uppercase tracking-[3px] mb-4">
+            What we handle
+          </span>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-forest mb-6">
-            Atlanta&apos;s Premier Full-Service Landscaping Company
+            The yard work homeowners notice when it is done right
           </h2>
           <p className="text-charcoal/70 text-base leading-relaxed">
-            Thoughtful design, reliable maintenance, and clean installations — delivered with care, consistency, and attention to detail.
+            Urban Elements focuses on the visible details: crisp edges, healthy beds, smart plant choices, level surfaces, and work areas that are cleaned up before we leave.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group"
-            >
-              <Link href={s.href} className="block relative h-[420px] rounded-xl overflow-hidden shadow-lg">
+        <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 [perspective:1000px]">
+          {services.map((s) => (
+            <div key={s.title} className="service-card group">
+              <Link
+                href={s.href}
+                onMouseMove={handleCardMove}
+                onMouseLeave={handleCardLeave}
+                className="block relative h-[420px] overflow-hidden rounded-md shadow-lg will-change-transform"
+              >
                 <Image 
                   src={s.img} 
                   alt={s.title} 
                   fill 
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                {/* Gradient overlay that darkens on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/40 to-transparent group-hover:from-forest group-hover:via-forest/60 transition-colors duration-500" />
                 
                 <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col h-full justify-end">
@@ -74,7 +143,7 @@ export default function HomeServices() {
                   </span>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
